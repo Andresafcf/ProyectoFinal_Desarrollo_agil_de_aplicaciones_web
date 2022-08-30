@@ -1,23 +1,21 @@
 from flask import Flask, request
-from flask import jsonify
 import pickle
-from sklearn.naive_bayes import *
 import json
 from flask_cors import CORS, cross_origin
+
 app = Flask (__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route("/")
-def info():
-    return "hola mundo"
+def index():
+    return "Index"
 
 @app.route("/classifier", methods=['GET'])
 @cross_origin()
 def cargar_datos():
 
     shift = int (request.args.get("shift"))
-    #district = int (request.args.get("district"))
-    
+        
     dict = {}
     dict["Distritos"] = []
     ubicacion = [
@@ -48,6 +46,5 @@ def cargar_datos():
     return json.dumps(dict)
 
 if __name__== '__main__':
-    app.run(debug=True)
-    ruta = 'dicc.json'  
+    app.run(debug=True) 
     
